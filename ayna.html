@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Инвестиционное предложение — Айна</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FBF8F3;
+    --warm-white: #FFFFFF;
+    --dark: #1A1714;
+    --accent: #C8873A;
+    --accent-light: #F0C98A;
+    --accent-pale: #FDF3E3;
+    --green: #2D6A4F;
+    --green-light: #E8F5EE;
+    --text: #3D3530;
+    --text-light: #7A6E68;
+    --border: #E8E0D5;
+    --shadow: 0 4px 24px rgba(26,23,20,0.08);
+    --shadow-lg: 0 12px 48px rgba(26,23,20,0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Manrope', sans-serif; background: var(--cream); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+  /* HERO */
+  .hero { min-height: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px 80px; background: linear-gradient(160deg, #FBF8F3 0%, #F5EDD9 50%, #EDE0C8 100%); position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(200,135,58,0.08) 0%, transparent 70%); border-radius: 50%; }
+  .hero::after { content: ''; position: absolute; bottom: -150px; left: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(45,106,79,0.06) 0%, transparent 70%); border-radius: 50%; }
+  .hero-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+  .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(48px, 8vw, 96px); font-weight: 900; color: var(--dark); line-height: 1; margin-bottom: 16px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
+  .hero-name span { color: var(--accent); display: block; }
+  .hero-subtitle { font-size: clamp(16px, 2.5vw, 22px); font-weight: 400; color: var(--text-light); max-width: 560px; margin: 0 auto 48px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
+  .hero-numbers { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
+  .hero-num { text-align: center; }
+  .hero-num-value { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; color: var(--dark); line-height: 1; }
+  .hero-num-value span { color: var(--accent); }
+  .hero-num-label { font-size: 12px; font-weight: 500; color: var(--text-light); letter-spacing: 1px; text-transform: uppercase; margin-top: 6px; }
+  .hero-divider { width: 1px; height: 48px; background: var(--border); align-self: center; }
+
+  /* SECTIONS */
+  .section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: var(--dark); line-height: 1.2; margin-bottom: 20px; }
+  .section-text { font-size: 17px; color: var(--text-light); max-width: 640px; line-height: 1.8; }
+  .divider { width: 100%; height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
+
+  /* MODEL CARDS */
+  .model-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 56px; }
+  .model-card { background: var(--warm-white); border-radius: 20px; padding: 36px 32px; border: 1px solid var(--border); box-shadow: var(--shadow); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden; }
+  .model-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .model-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
+  .model-card-icon { width: 52px; height: 52px; background: var(--accent-pale); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 20px; }
+  .model-card-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+  .model-card-text { font-size: 15px; color: var(--text-light); line-height: 1.7; }
+
+  /* PROOF */
+  .proof-bg { background: var(--dark); padding: 80px 24px; }
+  .proof-inner { max-width: 1100px; margin: 0 auto; }
+  .proof-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .proof-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 44px); font-weight: 700; color: #FBF8F3; margin-bottom: 16px; }
+  .proof-subtitle { font-size: 16px; color: rgba(251,248,243,0.5); margin-bottom: 56px; max-width: 580px; }
+  .proof-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; background: rgba(255,255,255,0.05); border-radius: 20px; overflow: hidden; margin-bottom: 48px; }
+  .proof-stat { background: rgba(255,255,255,0.03); padding: 40px 32px; text-align: center; transition: background 0.3s ease; }
+  .proof-stat:hover { background: rgba(200,135,58,0.1); }
+  .proof-stat-value { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--accent-light); line-height: 1; margin-bottom: 8px; }
+  .proof-stat-label { font-size: 13px; color: rgba(251,248,243,0.5); font-weight: 500; }
+  .proof-timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .proof-timeline-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px 24px; }
+  .proof-timeline-date { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .proof-timeline-text { font-size: 15px; color: rgba(251,248,243,0.75); line-height: 1.6; }
+  .proof-timeline-text strong { color: #FBF8F3; }
+
+  /* MATH */
+  .math-section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+  .math-explain { background: var(--accent-pale); border-radius: 20px; padding: 40px; margin-top: 48px; border: 1px solid rgba(200,135,58,0.2); }
+  .math-explain-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+  .math-explain-text { font-size: 15px; color: var(--text); line-height: 1.9; }
+  .math-flow { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 40px; }
+  .math-flow-item { background: var(--warm-white); border-radius: 14px; padding: 20px 24px; border: 1px solid var(--border); text-align: center; flex: 1; min-width: 130px; box-shadow: var(--shadow); }
+  .math-flow-num { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .math-flow-label { font-size: 12px; color: var(--text-light); margin-top: 6px; font-weight: 500; }
+  .math-flow-arrow { font-size: 20px; color: var(--accent); flex-shrink: 0; }
+
+  /* INVESTMENT */
+  .invest-bg { background: linear-gradient(135deg, #F5EDD9 0%, #EDE0C8 100%); padding: 80px 24px; }
+  .invest-inner { max-width: 1100px; margin: 0 auto; }
+  .invest-card { background: var(--warm-white); border-radius: 28px; padding: 56px; box-shadow: var(--shadow-lg); margin-top: 48px; position: relative; overflow: hidden; }
+  .invest-card::after { content: '×2.5'; position: absolute; right: 48px; top: 48px; font-family: 'Playfair Display', serif; font-size: 120px; font-weight: 900; color: rgba(200,135,58,0.06); line-height: 1; pointer-events: none; }
+  .invest-main { display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: center; margin-bottom: 56px; }
+  .invest-side-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--text-light); margin-bottom: 12px; }
+  .invest-amount { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 900; color: var(--dark); line-height: 1; margin-bottom: 8px; }
+  .invest-amount-sub { font-size: 14px; color: var(--text-light); }
+  .invest-arrow { width: 64px; height: 64px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; }
+  .invest-return { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 900; color: var(--green); line-height: 1; margin-bottom: 8px; }
+  .invest-return-sub { font-size: 14px; color: var(--text-light); }
+
+  /* PAYMENT */
+  .payment-section { margin-top: 48px; padding-top: 48px; border-top: 1px solid var(--border); }
+  .payment-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+  .payment-subtitle { font-size: 14px; color: var(--text-light); margin-bottom: 32px; }
+  .payment-phases { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .payment-phase { border-radius: 16px; padding: 28px 24px; }
+  .phase-wait { background: #F5F5F5; border: 1px solid #E0E0E0; }
+  .phase-start { background: linear-gradient(135deg, #FDF3E3, #FAE8C8); border: 1px solid rgba(200,135,58,0.3); }
+  .phase-grow { background: linear-gradient(135deg, #E8F5EE, #D4EDDF); border: 1px solid rgba(45,106,79,0.3); }
+  .phase-period { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .phase-wait .phase-period { color: #999; }
+  .phase-start .phase-period { color: var(--accent); }
+  .phase-grow .phase-period { color: var(--green); }
+  .phase-amount { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; line-height: 1; margin-bottom: 6px; }
+  .phase-wait .phase-amount { color: #CCC; }
+  .phase-start .phase-amount { color: var(--accent); }
+  .phase-grow .phase-amount { color: var(--green); }
+  .phase-desc { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+
+  /* TABLE */
+  .schedule-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+  .schedule-table thead tr { background: var(--dark); }
+  .schedule-table thead th { padding: 16px 20px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(251,248,243,0.6); text-align: left; }
+  .schedule-table tbody tr { background: var(--warm-white); border-bottom: 1px solid var(--border); transition: background 0.2s ease; }
+  .schedule-table tbody tr:hover { background: var(--accent-pale); }
+  .schedule-table tbody tr.row-wait { background: #F9F9F9; }
+  .schedule-table tbody tr.row-last { background: var(--green-light); }
+  .schedule-table td { padding: 14px 20px; font-size: 14px; color: var(--text); }
+  .schedule-table td.month-num { font-weight: 700; color: var(--text-light); width: 80px; }
+  .schedule-table td.payment-amount { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; }
+  .td-wait { color: #CCC !important; }
+  .td-active { color: var(--accent) !important; }
+  .td-done { color: var(--green) !important; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+  .badge-wait { background: #F0F0F0; color: #999; }
+  .badge-active { background: var(--accent-pale); color: var(--accent); }
+  .badge-done { background: var(--green-light); color: var(--green); }
+
+  /* RISKS */
+  .risks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 48px; }
+  .risk-card { background: var(--warm-white); border-radius: 16px; padding: 28px 24px; border: 1px solid var(--border); }
+  .risk-question { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; }
+  .risk-q-icon { width: 22px; height: 22px; background: #F0F0F0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text-light); flex-shrink: 0; margin-top: 1px; }
+  .risk-answer { font-size: 14px; color: var(--text-light); line-height: 1.7; padding-left: 32px; }
+
+  /* SUMMARY */
+  .summary-bg { background: var(--dark); padding: 80px 24px; text-align: center; }
+  .summary-inner { max-width: 800px; margin: 0 auto; }
+  .summary-title { font-family: 'Playfair Display', serif; font-size: clamp(36px, 6vw, 64px); font-weight: 900; color: #FBF8F3; line-height: 1.1; margin-bottom: 24px; }
+  .summary-title span { color: var(--accent-light); }
+  .summary-text { font-size: 18px; color: rgba(251,248,243,0.6); line-height: 1.8; margin-bottom: 56px; }
+  .summary-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 32px 24px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .summary-item-value { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--accent-light); line-height: 1; margin-bottom: 6px; white-space: nowrap; }
+  .summary-item-label { font-size: 13px; color: rgba(251,248,243,0.4); font-weight: 500; }
+
+  footer { background: #111; padding: 32px 24px; text-align: center; font-size: 13px; color: rgba(255,255,255,0.2); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes bounce { 0%, 100% { transform: rotate(45deg) translateY(0); } 50% { transform: rotate(45deg) translateY(6px); } }
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .hero-divider { display: none; }
+    .invest-main { grid-template-columns: 1fr; text-align: center; }
+    .invest-arrow { margin: 0 auto; transform: rotate(90deg); }
+    .summary-box { grid-template-columns: 1fr; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">Инвестиционное предложение</div>
+  <h1 class="hero-name">Для Айны<br><span>Дондаковой</span></h1>
+  <p class="hero-subtitle">Бизнес-модель на коротких AI-видео — с понятной математикой, реальным кейсом и прозрачным графиком выплат</p>
+  <div class="hero-numbers">
+    <div class="hero-num">
+      <div class="hero-num-value">$40<span>k</span></div>
+      <div class="hero-num-label">Инвестиция</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-num">
+      <div class="hero-num-value">$100<span>k</span></div>
+      <div class="hero-num-label">Возврат</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-num">
+      <div class="hero-num-value">24<span>мес</span></div>
+      <div class="hero-num-label">Срок</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-num">
+      <div class="hero-num-value">×<span>2.5</span></div>
+      <div class="hero-num-label">Доходность</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- MODEL -->
+<section class="section">
+  <div class="section-label reveal">Бизнес-модель</div>
+  <h2 class="section-title reveal">Как это работает</h2>
+  <p class="section-text reveal">Команда контент-мейкеров создаёт короткие видео об AI-инструментах. Каждый сервис платит 20–30% реферальных комиссий с подписок. Больше видео — больше охват — больше дохода.</p>
+
+  <div class="model-grid">
+    <div class="model-card reveal">
+      <div class="model-card-icon">🎬</div>
+      <div class="model-card-title">Команда мейкеров</div>
+      <div class="model-card-text">30–40 контент-мейкеров создают по 12 видео в месяц каждый. Итого 360–480 уникальных роликов — и каждый публикуется сразу на 3 платформах: TikTok, Instagram, YouTube. По факту это <strong>1 000–1 400 единиц контента</strong> в месяц, которые одновременно генерируют трафик.</div>
+    </div>
+    <div class="model-card reveal">
+      <div class="model-card-icon">📱</div>
+      <div class="model-card-title">Видео продвигают AI-сервисы</div>
+      <div class="model-card-text">Каждый ролик показывает как работать с AI-инструментами — генерация контента, автоматизация, аналитика видео. В описание встроена реферальная ссылка. Зритель подписывается на сервис — бизнес получает комиссию.</div>
+    </div>
+    <div class="model-card reveal">
+      <div class="model-card-icon">💰</div>
+      <div class="model-card-title">Реферальный доход с подписок</div>
+      <div class="model-card-text">Каждый AI-сервис платит бизнесу 20–30% от стоимости подписки — и не разово, а ежемесячно пока пользователь активен. Чем больше подписчиков привлекают видео, тем выше ежемесячный доход. Именно из этого дохода и формируются выплаты по инвестиционному предложению.</div>
+    </div>
+    <div class="model-card reveal">
+      <div class="model-card-icon">📈</div>
+      <div class="model-card-title">Масштабирование</div>
+      <div class="model-card-text">Больше мейкеров → больше видео → больше просмотров → больше реферальных подписок. Модель масштабируется линейно. Именно поэтому стартовый капитал критически важен, так как вероятность успеха прямо пропорциональна объёму контента.</div>
+    </div>
+    <div class="model-card reveal" style="grid-column: 1 / -1; background: linear-gradient(135deg, #1A1714, #2C2825); border-color: rgba(200,135,58,0.3);">
+      <div class="model-card-icon" style="background: rgba(200,135,58,0.15);">🔍</div>
+      <div class="model-card-title" style="color: #FBF8F3;">Инструмент:</div>
+      <div class="model-card-text" style="color: rgba(251,248,243,0.7);">Я использую <strong style="color: var(--accent-light);">TrendSee</strong> — сервис аналитики коротких видео, созданный теми же людьми чей кейс показан ниже. Так же есть похожий сервис <strong style="color: var(--accent-light);">Virale</strong> от Chatplace. Обе эти системы в реальном времени отслеживают какие ролики набирают миллионы просмотров по всему миру. Мейкеры получают вирусную структуру — и воспроизводят её. Это не угадывание трендов, это работа с данными. Математически вероятность попадания в просмотры при таком подходе <strong style="color: var(--accent-light);">кратно выше</strong> чем у любого одиночного блогера или конкурента без аналитики.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROOF -->
+<div class="proof-bg">
+  <div class="proof-inner">
+    <div class="proof-label reveal">Доказательство</div>
+    <h2 class="proof-title reveal">Эта модель уже работает.<br>Вот реальные цифры.</h2>
+    <p class="proof-subtitle reveal">Публичный кейс канала SKR — запущен в январе 2026, все данные из открытого Telegram-канала: <a href="https://t.me/Skrdn_school" target="_blank" style="color: var(--accent-light); text-decoration: underline;">t.me/Skrdn_school</a></p>
+
+    <div class="proof-stats reveal">
+      <div class="proof-stat">
+        <div class="proof-stat-value">34</div>
+        <div class="proof-stat-label">контент-мейкера</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-value">399</div>
+        <div class="proof-stat-label">уникальных видео за месяц</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-value">14.6М</div>
+        <div class="proof-stat-label">просмотров за месяц</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-value">~$10k</div>
+        <div class="proof-stat-label">доход организатора за месяц</div>
+      </div>
+    </div>
+
+    <div class="proof-timeline reveal">
+      <div class="proof-timeline-item">
+        <div class="proof-timeline-date">Январь 2026</div>
+        <div class="proof-timeline-text">Запуск с нуля. Система вышла на первые результаты <strong>быстрее чем ожидалось.</strong> Математика работает.</div>
+      </div>
+      <div class="proof-timeline-item">
+        <div class="proof-timeline-date">Февраль 2026</div>
+        <div class="proof-timeline-text">Мейкерам выплачено <strong>847 702 ₽ за месяц.</strong> Организатор заработал не меньше на реферальных.</div>
+      </div>
+      <div class="proof-timeline-item">
+        <div class="proof-timeline-date">Апрель 2026</div>
+        <div class="proof-timeline-text">Модель масштабируется. Запущен новый набор мейкеров. <strong>Система работает в автоматическом режиме.</strong></div>
+      </div>
+      <div class="proof-timeline-item">
+        <div class="proof-timeline-date">Вывод</div>
+        <div class="proof-timeline-text">От запуска до стабильного дохода — <strong>менее 2 месяцев.</strong> Я повторяю рабочую схему, а не изобретаю.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIFF -->
+<section class="section">
+  <h2 class="section-title reveal">Чем отличается моя модель</h2>
+  <p class="section-text reveal">На рынке уже есть похожие модели. Я осознанно выбрал другой подход — и вот почему это важно для финансового результата.</p>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px;">
+    <div style="background: #F9F9F9; border-radius: 20px; padding: 36px; border: 1px solid #E8E0D5;">
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 20px;">Другие модели на рынке</div>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 20px; height: 20px; background: #FFEDED; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #E05555; flex-shrink: 0; margin-top: 2px;">✗</div>
+          <div style="font-size: 15px; color: #7A6E68; line-height: 1.6;"><strong style="color: #3D3530;">Оплата за просмотры</strong> — создаёт непредсказуемые расходы. Видео залетело на миллион — платишь много. Не залетело — мейкер теряет мотивацию и уходит.</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 20px; height: 20px; background: #FFEDED; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #E05555; flex-shrink: 0; margin-top: 2px;">✗</div>
+          <div style="font-size: 15px; color: #7A6E68; line-height: 1.6;"><strong style="color: #3D3530;">Вступительный взнос с мейкеров</strong> ~10 000 ₽ — отсекает часть сильных кандидатов и создаёт конфликт интересов.</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 20px; height: 20px; background: #FFEDED; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #E05555; flex-shrink: 0; margin-top: 2px;">✗</div>
+          <div style="font-size: 15px; color: #7A6E68; line-height: 1.6;"><strong style="color: #3D3530;">Бюджет непрогнозируем</strong> — сложно планировать расходы и выплаты инвестору при плавающей оплате.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #E8F5EE, #D4EDDF); border-radius: 20px; padding: 36px; border: 1px solid rgba(45,106,79,0.3);">
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 20px;">Моя модель</div>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 20px; height: 20px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: white; flex-shrink: 0; margin-top: 2px;">✓</div>
+          <div style="font-size: 15px; color: #3D3530; line-height: 1.6;"><strong>Фиксированная оплата за видео</strong> — как фриланс-заказ. 2&nbsp;500&nbsp;₽ за ролик, вне зависимости от просмотров. Мейкер мотивирован на качество, бюджет предсказуем.</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 20px; height: 20px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: white; flex-shrink: 0; margin-top: 2px;">✓</div>
+          <div style="font-size: 15px; color: #3D3530; line-height: 1.6;"><strong>Никаких взносов с мейкеров</strong> — я плачу им, а не они мне. Это привлекает лучших специалистов без барьеров.</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 20px; height: 20px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: white; flex-shrink: 0; margin-top: 2px;">✓</div>
+          <div style="font-size: 15px; color: #3D3530; line-height: 1.6;"><strong>Полностью предсказуемый бюджет</strong> — я всегда знаю сколько тратится и сколько приходит. Именно это делает фиксированные выплаты инвестору возможными.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATH -->
+<section class="math-section">
+  <div class="section-label reveal">Математика</div>
+  <h2 class="section-title reveal">Почему важен масштаб</h2>
+  <p class="section-text reveal">Вероятность успеха напрямую зависит от количества видео. При 1 000+ единицах контента в месяц на трёх платформах — часть роликов неизбежно набирает сотни тысяч просмотров. Это не случайность, это статистика.</p>
+
+  <div class="math-flow reveal">
+    <div class="math-flow-item">
+      <div class="math-flow-num">$40k</div>
+      <div class="math-flow-label">Инвестиция</div>
+    </div>
+    <div class="math-flow-arrow">→</div>
+    <div class="math-flow-item">
+      <div class="math-flow-num">30+</div>
+      <div class="math-flow-label">Мейкеров</div>
+    </div>
+    <div class="math-flow-arrow">→</div>
+    <div class="math-flow-item">
+      <div class="math-flow-num">1 400+</div>
+      <div class="math-flow-label">Видео/мес × 3 площадки</div>
+    </div>
+    <div class="math-flow-arrow">→</div>
+    <div class="math-flow-item">
+      <div class="math-flow-num">12М+</div>
+      <div class="math-flow-label">Просмотров</div>
+    </div>
+    <div class="math-flow-arrow">→</div>
+    <div class="math-flow-item">
+      <div class="math-flow-num">$10–20k</div>
+      <div class="math-flow-label">Доход/месяц</div>
+    </div>
+  </div>
+
+  <div class="math-explain reveal">
+    <div class="math-explain-title">Почему именно $40,000 — разбивка по статьям</div>
+    <div class="math-explain-text">
+      <strong>Мейкеры — ~$35 000</strong><br>
+      30 человек × 12 видео × 2&nbsp;500&nbsp;₽ = 900&nbsp;000&nbsp;₽/мес. За 3 месяца работы до выхода на стабильный доход — 2&nbsp;700&nbsp;000&nbsp;₽ (~$35&nbsp;000). Это основная статья: чем больше мейкеров и видео, тем выше вероятность успеха.<br><br>
+
+      <strong>Операционные расходы — ~$5 000</strong><br>
+      Команда заливки (публикация видео на 3 платформы, ведение аккаунтов, аналитика), поиск и отбор мейкеров, платная реклама в Instagram на AI-аудиторию, технические расходы (антидетект-браузеры, прокси, сервисы аналитики).<br><br>
+
+
+      <strong>Итого: $40&nbsp;000</strong> — сумма рассчитана под конкретный результат. Чем больше видео, тем ближе вероятность успеха к 100%. Именно этот объём обеспечивает то количество попыток, при котором возврат ваших инвестиций становится практически неизбежным.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INVESTMENT -->
+<div class="invest-bg">
+  <div class="invest-inner">
+    <div class="section-label reveal">Условия</div>
+    <h2 class="section-title reveal">Ваше предложение</h2>
+    <p class="section-text reveal">Фиксированные условия. Никаких плавающих цифр и размытых формулировок.</p>
+
+    <div class="invest-card reveal">
+      <div class="invest-main">
+        <div>
+          <div class="invest-side-label">Вы вкладываете</div>
+          <div class="invest-amount">$40 000</div>
+          <div class="invest-amount-sub">Единовременно, в начале</div>
+        </div>
+        <div class="invest-arrow">→</div>
+        <div>
+          <div class="invest-side-label">Вы получаете обратно</div>
+          <div class="invest-return">$100 000</div>
+          <div class="invest-return-sub">За 20 месяцев, с 5-го по 24-й</div>
+        </div>
+      </div>
+
+      <div class="payment-section">
+        <div class="payment-title">График выплат</div>
+
+        <div class="payment-phases">
+          <div class="payment-phase phase-wait">
+            <div class="phase-period">Месяцы 1–4</div>
+            <div class="phase-amount">$0</div>
+            <div class="phase-desc">Построение системы, набор команды, первые тесты. Всё идёт в работу.</div>
+          </div>
+          <div class="payment-phase phase-start">
+            <div class="phase-period">С 5-го месяца</div>
+            <div class="phase-amount">$5 000</div>
+            <div class="phase-desc">Фиксированная выплата каждый месяц без исключений — 20 раз подряд.</div>
+          </div>
+          <div class="payment-phase phase-grow">
+            <div class="phase-period">20-й платёж</div>
+            <div class="phase-amount">$100 000</div>
+            <div class="phase-desc">Итоговая сумма к концу 24-го месяца. Ровно 2 года. Расчёт завершён.</div>
+          </div>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>Месяц</th>
+                <th>Статус</th>
+                <th>Выплата</th>
+                <th>Накоплено</th>
+                <th>Остаток</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-wait">
+                <td class="month-num">1–4</td>
+                <td><span class="badge badge-wait">Подготовка</span></td>
+                <td class="payment-amount td-wait">$0</td>
+                <td class="td-wait">$0</td>
+                <td class="td-wait">$100 000</td>
+              </tr>
+              <tr><td class="month-num">5</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$5 000</td><td>$95 000</td></tr>
+              <tr><td class="month-num">6</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$10 000</td><td>$90 000</td></tr>
+              <tr><td class="month-num">7</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$15 000</td><td>$85 000</td></tr>
+              <tr><td class="month-num">8</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$20 000</td><td>$80 000</td></tr>
+              <tr><td class="month-num">9</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$25 000</td><td>$75 000</td></tr>
+              <tr><td class="month-num">10</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$30 000</td><td>$70 000</td></tr>
+              <tr><td class="month-num">11</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$35 000</td><td>$65 000</td></tr>
+              <tr><td class="month-num">12</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$40 000</td><td>$60 000</td></tr>
+              <tr><td class="month-num">13</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$45 000</td><td>$55 000</td></tr>
+              <tr><td class="month-num">14</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$50 000</td><td>$50 000</td></tr>
+              <tr><td class="month-num">15</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$55 000</td><td>$45 000</td></tr>
+              <tr><td class="month-num">16</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$60 000</td><td>$40 000</td></tr>
+              <tr><td class="month-num">17</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$65 000</td><td>$35 000</td></tr>
+              <tr><td class="month-num">18</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$70 000</td><td>$30 000</td></tr>
+              <tr><td class="month-num">19</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$75 000</td><td>$25 000</td></tr>
+              <tr><td class="month-num">20</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$80 000</td><td>$20 000</td></tr>
+              <tr><td class="month-num">21</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$85 000</td><td>$15 000</td></tr>
+              <tr><td class="month-num">22</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$90 000</td><td>$10 000</td></tr>
+              <tr><td class="month-num">23</td><td><span class="badge badge-active">Выплата</span></td><td class="payment-amount td-active">$5 000</td><td>$95 000</td><td>$5 000</td></tr>
+              <tr class="row-last">
+                <td class="month-num">24</td>
+                <td><span class="badge badge-done">Финал</span></td>
+                <td class="payment-amount td-done">$5 000</td>
+                <td class="td-done">$100 000</td>
+                <td class="td-done">$0 — расчёт завершён</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="divider"></div>
+
+<section class="section">
+  <div class="section-label reveal">Коротко о моём опыте</div>
+  <h2 class="section-title reveal">Почему я это реализую</h2>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 48px;">
+
+    <div style="background: var(--warm-white); border-radius: 16px; padding: 28px 24px; border: 1px solid var(--border); box-shadow: var(--shadow);">
+      <div style="font-size: 28px; margin-bottom: 14px;">📅</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 8px;">15+ лет в маркетинге и трафике</div>
+      <div style="font-size: 14px; color: var(--text-light); line-height: 1.7;">С 2009 года — таргетированная реклама, арбитраж трафика, Facebook и Instagram. Я понимаю как работает внимание аудитории и как его конвертировать в деньги. За это время лично вложил в рекламу своих проектов <strong style="color: var(--dark);">~$350 000–400 000</strong> — знаю цену каждому клику.</div>
+    </div>
+
+    <div style="background: var(--warm-white); border-radius: 16px; padding: 28px 24px; border: 1px solid var(--border); box-shadow: var(--shadow);">
+      <div style="font-size: 28px; margin-bottom: 14px;">🏢</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 8px;">15 студий с нуля за 3 года</div>
+      <div style="font-size: 14px; color: var(--text-light); line-height: 1.7;">Открыл сеть студий лазерной эпиляции — команда 20+ человек, управляющий, мастера, водитель. Последние 5 студий открывались удалённо по регламентам без моего присутствия. Оборот всей сети за 3 года — <strong style="color: var(--dark);">$465 000</strong>. Я умею строить системы.</div>
+    </div>
+
+    <div style="background: var(--warm-white); border-radius: 16px; padding: 28px 24px; border: 1px solid var(--border); box-shadow: var(--shadow);">
+      <div style="font-size: 28px; margin-bottom: 14px;">🌍</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 8px;">Удалённое управление — мой формат</div>
+      <div style="font-size: 14px; color: var(--text-light); line-height: 1.7;">Работаю удалённо из Турции. Все процессы — автоматизированы, все команды — на дистанции. Этот проект не требует офиса и физического присутствия.</div>
+    </div>
+
+    <div style="background: var(--warm-white); border-radius: 16px; padding: 28px 24px; border: 1px solid var(--border); box-shadow: var(--shadow);">
+      <div style="font-size: 28px; margin-bottom: 14px;">🤖</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 8px;">В AI-контенте — изнутри</div>
+      <div style="font-size: 14px; color: var(--text-light); line-height: 1.7;">Последние 2 года — полное погружение в AI. Знаю 90+ топовых AI-инструментов и сотни сервисов. Лично сделал сотни креативов для разных проектов — знаю все процессы изнутри, а не по статьям. Работаю с TrendSee, Syntx, ChatPlace напрямую. Пока большинство только присматривается к AI — я уже в первых рядах тех, кто его применяет.</div>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #FDF3E3, #FAE8C8); border-radius: 16px; padding: 28px 24px; border: 1px solid rgba(200,135,58,0.3); box-shadow: var(--shadow);">
+      <div style="font-size: 28px; margin-bottom: 14px;">🎯</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 8px;">Я не изобретаю — я повторяю</div>
+      <div style="font-size: 14px; color: var(--text-light); line-height: 1.7;">Модель уже доказана чужими руками. Моя задача — применить свой опыт в маркетинге и управлении командами чтобы повторить результат. Без проб и ошибок — с готовой картой.</div>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #1A1714, #2C2825); border-radius: 16px; padding: 28px 24px; border: 1px solid rgba(200,135,58,0.3); box-shadow: var(--shadow);">
+      <div style="font-size: 28px; margin-bottom: 14px;">🚀</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: #FBF8F3; margin-bottom: 8px;">Момент — сейчас</div>
+      <div style="font-size: 14px; color: rgba(251,248,243,0.7); line-height: 1.7;">AI-контент растёт каждый месяц. Через год здесь будет в 10 раз больше игроков. Сейчас — минимальная конкуренция и максимальные шансы. Я в 100% фокусе на этой теме — это не очередной проект, это моё главное направление. Уже есть базы контент-мейкеров, рилс-мейкеров и AI-креаторов. Есть навык парсинга баз данных, фильтрации и рассылок. Единственное что нужно для старта — капитал нужного масштаба.</div>
+    </div>
+
+    <div style="background: var(--warm-white); border-radius: 16px; padding: 28px 24px; border: 1px solid var(--border); box-shadow: var(--shadow);">
+      <div style="font-size: 28px; margin-bottom: 14px;">💼</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 8px;">5 млн ₽ за год — портмоне из Китая</div>
+      <div style="font-size: 14px; color: var(--text-light); line-height: 1.7;">Производство в Китае, продажи через собственные сайты и партнёрские агрегаторы. Приём звонков, обработка заказов и отправка — полностью на аутсорсе. Я занимался только трафиком: тизеры, таргет Instagram и VK. Это и есть моя модель — делегировать всё кроме главного.</div>
+    </div>
+
+    <div style="background: var(--warm-white); border-radius: 16px; padding: 28px 24px; border: 1px solid var(--border); box-shadow: var(--shadow);">
+      <div style="font-size: 28px; margin-bottom: 14px;">👥</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 8px;">350 000 подписчиков с нуля за 2 года</div>
+      <div style="font-size: 14px; color: var(--text-light); line-height: 1.7;">Бизнес-сообщество ВКонтакте — вырос с 0 до 350 000 подписчиков без платного трафика. Только переговоры с владельцами других сообществ, бартер и взаимообмен аудиториями. Команда дизайнеров, монетизация через рекламу, собственные и партнёрские товары. В итоге — выгодно продал как готовый актив.</div>
+    </div>
+
+    <div style="background: var(--warm-white); border-radius: 16px; padding: 28px 24px; border: 1px solid var(--border); box-shadow: var(--shadow);">
+      <div style="font-size: 28px; margin-bottom: 14px;">🤖</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 8px;">200 000 участников за 3 месяца</div>
+      <div style="font-size: 14px; color: var(--text-light); line-height: 1.7;">Telegram-бот по крипто-тематике с 10-уровневой партнёрской программой. За 3 месяца — 200 000 участников в Telegram, 50 000 подписчиков на YouTube, 12 000 в Instagram. Весь рост — органический, через реферальные ссылки участников. Монетизация через рекламу крипто-проектов. Проект закрыл сам — когда участники начали обманывать систему. Знаю где слабые места реферальных механик — и как их закрыть в новой модели.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- RISKS -->
+<section class="section">
+  <div class="section-label reveal">Вопросы и ответы</div>
+  <h2 class="section-title reveal">Возможные сомнения</h2>
+  <p class="section-text reveal">Разбираем честно — без маркетинговых обещаний.</p>
+
+  <div class="risks-grid">
+    <div class="risk-card reveal">
+      <div class="risk-question"><div class="risk-q-icon">?</div>А если видео не будут набирать просмотры?</div>
+      <div class="risk-answer">Мейкеры работают по проверенным форматам — анализируют уже вирусные ролики через сервисы аналитики и повторяют структуру лучших. При 1 000+ видео в месяц на трёх платформах математически невозможно чтобы все провалились. Это вопрос объёма, не удачи.</div>
+    </div>
+    <div class="risk-card reveal">
+      <div class="risk-question"><div class="risk-q-icon">?</div>Что если заблокируют аккаунты?</div>
+      <div class="risk-answer">Аккаунты в соцсетях принадлежат моей команде — мейкеры только создают видео. Работа ведётся одновременно в TikTok, Instagram и YouTube. Блокировка одного аккаунта — это потеря 2–3% от потока. Система специально построена на распределении по платформам и аккаунтам.</div>
+    </div>
+    <div class="risk-card reveal">
+      <div class="risk-question"><div class="risk-q-icon">?</div>Откуда уверенность что модель работает?</div>
+      <div class="risk-answer">Это не теория. Идентичная модель запущена в январе 2026 и показала результат менее чем за 2 месяца. Данные публичные, проверяемые по ссылке на канал выше. Я повторяю рабочую схему, а не изобретаю новую.</div>
+    </div>
+    <div class="risk-card reveal">
+      <div class="risk-question"><div class="risk-q-icon">?</div>Почему $5 000 фиксировано, а не процент?</div>
+      <div class="risk-answer">Фиксированный платёж удобен для обеих сторон. Вы точно знаете сколько придёт и когда — никаких споров о том как считать прибыль. Поставили в календарь и забыли. Деньги приходят как часы.</div>
+    </div>
+    <div class="risk-card reveal">
+      <div class="risk-question"><div class="risk-q-icon">?</div>Что происходит после 20-го платежа?</div>
+      <div class="risk-answer">Расчёт завершён полностью. Вы получили $100 000, обязательств больше нет. Бизнес продолжает работать самостоятельно. При желании можно обсудить новые условия для продолжения сотрудничества.</div>
+    </div>
+    <div class="risk-card reveal">
+      <div class="risk-question"><div class="risk-q-icon">?</div>Выплаты в какой валюте и как?</div>
+      <div class="risk-answer">Выплаты в USDT — стейблкоин привязанный к доллару. Удобно, быстро, без банковских комиссий и задержек. 1 USDT = 1 USD — никаких сюрпризов с конвертацией.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<div class="summary-bg">
+  <div class="summary-inner">
+    <h2 class="summary-title reveal">Итого:<br><span>$40 000 → $100 000</span></h2>
+    <p class="summary-text reveal">Фиксированный платёж $5 000 каждый месяц. 20 выплат начиная с 5-го месяца. Ровно 2 года. Доходность ×2.5</p>
+    <div class="summary-box reveal">
+      <div>
+        <div class="summary-item-value">$40k</div>
+        <div class="summary-item-label">Вложено</div>
+      </div>
+      <div>
+        <div class="summary-item-value">$5&nbsp;000</div>
+        <div class="summary-item-label">Ежемесячно</div>
+      </div>
+      <div>
+        <div class="summary-item-value">$100k</div>
+        <div class="summary-item-label">Итого получено</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Инвестиционное предложение · Подготовлено персонально для Айны Дондаковой
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
