@@ -78,8 +78,8 @@
   .math-explain { background: var(--accent-pale); border-radius: 20px; padding: 40px; margin-top: 48px; border: 1px solid rgba(200,135,58,0.2); }
   .math-explain-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
   .math-explain-text { font-size: 15px; color: var(--text); line-height: 1.9; }
-  .math-flow { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 40px; }
-  .math-flow-item { background: var(--warm-white); border-radius: 14px; padding: 20px 24px; border: 1px solid var(--border); text-align: center; flex: 1; min-width: 130px; box-shadow: var(--shadow); }
+  .math-flow { display: flex; align-items: center; gap: 16px; margin-top: 40px; }
+  .math-flow-item { background: var(--warm-white); border-radius: 14px; padding: 20px 24px; border: 1px solid var(--border); text-align: center; flex: 1; min-width: 130px; box-shadow: var(--shadow); white-space: nowrap; }
   .math-flow-num { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--accent); line-height: 1; }
   .math-flow-label { font-size: 12px; color: var(--text-light); margin-top: 6px; font-weight: 500; }
   .math-flow-arrow { font-size: 20px; color: var(--accent); flex-shrink: 0; }
@@ -181,8 +181,6 @@
     .summary-bg { padding: 48px 16px !important; }
     .model-grid { margin-top: 32px; gap: 16px; }
     .model-card { padding: 24px 20px; }
-    .math-flow { gap: 10px; }
-    .math-flow-item { padding: 14px 16px; min-width: 100px; }
     .math-explain { padding: 24px 16px; margin-top: 32px; }
     .payment-phases { gap: 12px; margin-bottom: 24px; }
     .payment-phase { padding: 20px 16px; }
@@ -205,6 +203,10 @@
     .section-title { font-size: clamp(26px, 6vw, 36px) !important; }
     .invest-amount { font-size: 36px !important; }
     .invest-return { font-size: 36px !important; }
+    .math-flow { flex-direction: column !important; align-items: stretch !important; gap: 8px !important; }
+    .math-flow-item { min-width: unset !important; width: 100% !important; flex: none !important; white-space: normal !important; }
+    .math-flow-arrow { transform: rotate(90deg) !important; text-align: center !important; display: block !important; }
+    .math-flow-num { font-size: 24px !important; }
   }
 </style>
 </head>
